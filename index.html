@@ -1,0 +1,165 @@
+<html>
+<head>
+<meta charset="utf8">
+<title>Pac-Man . 吃豆游戏</title>
+<link rel="shortcut icon" href="favicon.png">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+	body{background-color: #292929}
+
+	*{padding:0;margin:0;}
+
+	.wrapper{
+		width: 960px;
+		margin:40px auto;
+		line-height:36px;
+		text-align:center;
+		color:#999;
+		position: relative;
+	}
+	canvas{display:block;background: #000;}
+	.mod-botton{
+		height: 32px;
+		padding: 15px 0;
+		text-align: center;
+	}
+
+
+	.login-game{
+		padding-top:240px;
+		top: 200px !important;
+	}
+	.begin-game{
+		padding-top:40px;
+	}
+	.how-game{
+		background-color: #000;
+		text-align: center;
+	}
+	.rank-game{
+		padding-top:40px;
+		min-height: 512px;
+		background-color: #000;
+	}
+</style>
+</head>
+<body>
+
+
+
+
+
+<div class="wrapper">
+	<div class="controls">
+	 	<div >
+			<span>Time：</span>
+			<span id="cost-time"  class="cost-time" ></span>
+		</div>
+		 <div id="hellow" style="display: none;">New Game</div>
+	</div>
+
+
+	<div id="dialog-cnt" style=""></div>
+
+	
+
+	<canvas id="canvas" width="960" height="640">不支持画布</canvas>
+
+
+	<!-- <p>按［空格］暂停或继续</p> -->
+	<div id="game-over">
+		
+	</div>	
+
+</div>
+ <div style="text-align: center;font-size: 16px;margin-top: 30px;">
+      Nickname service is powered by Nas Passport.
+    </div>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/neb.js"></script>
+<script src="js/nebulas.js"></script>
+<script src="js/api.js"></script>
+<script src="js/counttime.js"></script>
+<script src="js/render.js"></script>
+<script src="game.js"></script>
+<script src="index.js"></script>
+
+<script>
+let isClick = true
+
+checkWin('login')
+
+
+
+
+
+$('#keyfile').change(function(e){
+    getKeyFile(this,e)
+    .then((data) => {
+        $('#file-text').text(data.keyfile.address)
+    })
+})
+
+
+
+
+$('#lock').click(()=>{
+ 
+	if(!isClick){
+
+		return
+	}
+	isClick = false
+
+	let password = $('#password').find('input').val()
+
+
+	setTimeout(() =>{
+		isClick = true
+	},1500)
+	if(!password){
+		dialog($('#dialog-cnt'),'password required')
+		
+		return
+	}
+	validateWallet(keyfile,password)
+	.then((data)=>{
+
+		if(data.ret !=0){
+		  dialog($('#dialog-cnt'),data.msg)
+		  return
+		}
+
+		gameTimer = new CountTimer(rendTime)  //实例化定时器
+		function rendTime(str){
+			// console.log(str)
+			$('#cost-time').html(str)
+		}
+
+
+    	 $('#hellow').text('Hi，'+data.name)
+    	$('#hellow').show()
+
+
+		checkWin('begin') //加载开始模板
+
+
+		
+
+		startGame()
+		
+
+	})
+})
+
+
+
+
+
+</script>
+</body>
+</html>

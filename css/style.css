@@ -245,7 +245,7 @@ pointer-events: auto;
   margin-bottom: 30px;
 }
 .over span{
-  background: #F46E6E;
+  /*background: #F46E6E;*/
   display: inline-block;
   border-radius: 6px;
   pointer-events: auto;

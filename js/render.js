@@ -29,10 +29,11 @@ let checkWin = (moves, options) => {
           <div style="text-align:center;margin-bottom:30px;">
             <img src="You-Win.png" style="width:50vmin;,margin-bottom:20px;"><br />
           </div>
-          <div class=" over" ><span class="new-game"> Waiting!</span> </div>
+          <div class=" over" style="background-color:transparent;"><span class="new-game" style="background-color:transparent;"> Waiting to upload your score to Nebulas!</span> </div>
           `
         gameover.innerHTML = msg
         $('#game-over').attr('class', 'over-game')
+
         console.log('-----------------查询costtime----------------')
 
         newTransaction(contractAddress,"welcomeHero","[" + score + "," + costTime + "]",uploadSocre)
@@ -45,12 +46,13 @@ let checkWin = (moves, options) => {
         function uploadSocre(resp){
 
             cmpScore = getStrByBum(costTime)
+
               msg = ` 
                     <div style="text-align:center;margin-bottom:30px;">
                       <img src="You-Win.png" style="width:50vmin;,margin-bottom:20px;"><br />
                       <span id="cost-time" class="cost-time" style="font-size:16px;color:#fff" >score：${score}  &nbsp&nbsp&nbsp  time：${cmpScore}</span>
                     </div>
-                    <div class=" over" ><span class="new-game"> Play Again!</span> </div>
+                    <div class=" over" ><span class="new-game" style="background: #F46E6E;" > Play Again!</span> </div>
                     <div class=" over" ><span class="rank">Rank</span></div>
                   `
               gameover.innerHTML = msg

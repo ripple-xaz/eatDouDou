@@ -181,48 +181,23 @@ margin: 0 auto;
 /*display: none;*/
 text-align: center;
 top: 10px;
-}
-#kaishi,#jiami{
-pointer-events: auto;
-font-size: 16px;
-color: #FFFFFF;
-height: 22px;
-line-height: 22px;  
-text-align: left;
-font-size: 14px;  
-margin:10px 0;  
-}
-#wallet,#password,#lock{
-width: 100%;
-height: 50px;
-line-height: 50px;
-text-align: center;
-font-size: 18px;
-color: #FFFFFF;
-border: 1px solid #5A6686;
-border-radius: 4px;
-position: relative;
-pointer-events: auto;
-/*transform: translateX(-50%);*/
-cursor: pointer;
-}
-#jiami{
-pointer-events: auto;
+color:#fff;
+
 }
 #password{
 pointer-events: auto;
 margin-bottom: 20px;
 }
 #lock{
-background: #FBCB30;
 pointer-events: auto;
-color: black;
-font-size: 18px;
-cursor: pointer;
-font-weight: 600;
+font-size: 20px;
+
 }
-#lock:hover{
-opacity: 0.8;
+#lock a{
+  cursor: pointer;
+}
+#lock a:hover{
+  opacity: 0.8;
 }
 input{
 outline:none;

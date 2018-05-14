@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta charset="utf8">
-<title>Pac-Man . 吃豆游戏</title>
+<title>Pac-Man 吃豆豆</title>
 <link rel="shortcut icon" href="favicon.png">
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
 <link rel="stylesheet" href="css/style.css">
@@ -97,7 +97,16 @@
 <script>
 let isClick = true
 
-checkWin('login')
+
+if(webExtensionWallet && browser === "Chrome"){
+	gameTimer = new CountTimer()  //实例化定时器
+ 	checkWin('begin')
+}else{
+	
+	checkWin('login')
+}
+
+
 
 
 
@@ -112,57 +121,6 @@ $('#keyfile').change(function(e){
 
 
 
-
-$('#lock').click(()=>{
- 
-	// if(!isClick){
-
-	// 	return
-	// }
-	// isClick = false
-
-	// let password = $('#password').find('input').val()
-
-
-	// setTimeout(() =>{
-	// 	isClick = true
-	// },1500)
-	// if(!password){
-	// 	dialog($('#dialog-cnt'),'password required')
-		
-	// 	return
-	// }
-	// validateWallet(keyfile,password)
-	// .then((data)=>{
-
-	// 	if(data.ret !=0){
-	// 	  dialog($('#dialog-cnt'),data.msg)
-	// 	  return
-	// 	}
-
-	// 
-
-
-		
-
-
- //    	var name = data.name.length > 25 ? data.name.substring(0,25)+'...' : data.name
-	//     $('#hellow').text('Hi，'+name)
-	//     $('#hellow').show()
-	//     
-gameTimer = new CountTimer()  //实例化定时器
-
-		checkWin('begin') //加载开始模板
-		// start()
-
-
-		
-
-		
-		
-
-	// })
-})
 
 
 

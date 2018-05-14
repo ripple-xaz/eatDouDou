@@ -18,19 +18,33 @@ let checkWin = (moves, options) => {
     gameTimer.stop()
 
     // console.log(startTimer)
+   
 
+     
         let costTime = parseInt(gameTimer.checkTime(state.mm) + '' + gameTimer.checkTime(state.ss) + '' + gameTimer.checkTime(state.ms))
-
-
 
         console.log('-----------------查询costtime----------------')
         console.log(costTime)
+        msg = ` 
+          <div style="text-align:center;margin-bottom:30px;">
+            <img src="You-Win.png" style="width:50vmin;,margin-bottom:20px;"><br />
+          </div>
+          <div class=" over" ><span class="new-game"> Waiting!</span> </div>
+          `
+        gameover.innerHTML = msg
+        $('#game-over').attr('class', 'over-game')
         console.log('-----------------查询costtime----------------')
+
         newTransaction(contractAddress,"welcomeHero","[" + score + "," + costTime + "]",uploadSocre)
 
-        function uploadSocre(resp){
-            cmpScore = getStrByBum(costTime)
+   
 
+        
+       
+
+        function uploadSocre(resp){
+
+            cmpScore = getStrByBum(costTime)
               msg = ` 
                     <div style="text-align:center;margin-bottom:30px;">
                       <img src="You-Win.png" style="width:50vmin;,margin-bottom:20px;"><br />
@@ -50,31 +64,19 @@ let checkWin = (moves, options) => {
 
 
   } else if (moves === 'login') {
+
     $('#game-over').attr('class', 'login-game')
-    // <div onclick="start()"></div>
-    //           <div id="kaishi">
-    //             Unlock the wallet and start the game.
-    //           </div>
-    //           <div id="wallet">
-    //             <span id="file-text">
-    //               Select Wallet
-    //             </span>
-    //             <input type="file" id="keyfile"  class="keyfile" style="position:absolute;opacity: 0;top:0;left:0;width: 100%;height: 100%;" >
-    //           </div>
-    //           <div id="jiami">
-    //             Wallet is encrypted. Please enter password.
-    //           </div>
-    //           <div id="password" style="background-color:#0C2544;">
-    //             <input type="password"  style="height: 45px;width:100%;font-size: 18px; box-sizing: border-box;background-color:transparent;color: white;border: 0 none;padding-left:14px;" >
-    //           </div>
-    msg = `<div id="login">
+        
+        msg = `<div id="login">
 
-                <img  style="margin-bottom:40px;width:187px;" src="logo.png">
+                  <img  style="margin-bottom:40px;width:187px;" src="logo.png">
 
-                <div id="lock">
-                  Play
-                </div>
-            </div>`
+                  <div id="lock">
+                     We need use chrome and install wallet extension.  
+                     <a herf="https://github.com/ChengOrangeJu/WebExtensionWallet" target="_blank"> https://github.com/ChengOrangeJu/WebExtensionWallet </a> 
+                  </div>
+
+              </div>`
 
     gameover.innerHTML = msg
 
@@ -83,7 +85,9 @@ let checkWin = (moves, options) => {
     $('#game-over').attr('class', 'login-game')
 
   } else if (moves === 'begin') {
+
     let img = '<img  style="margin-bottom:40px;width:187px;" src="logo.png">';
+
     console.log(gameisbegin)
     if (gameisbegin) {
 
@@ -118,28 +122,7 @@ let checkWin = (moves, options) => {
     let func = "getTopN"
     let args = "[" + 10 + "]"
     onSimulateCallClick(contractAddress,func, args, callback1);
-    // webGetNonce()
-    //   .then((data) => {
-    //     console.log('-----------------查询nonce----------------')
-    //     console.log(data)
-    //     console.log('-----------------查询nonce----------------')
-    //     if (data.balance === '0') {
-    //       dialog($('#dialog-cnt'), 'insufficient balance')
-    //       var rank = $('.rank')
-    //       $('.loader').remove()
-    //       return
-    //     }
-    //     config.nonce = parseInt(data.nonce) + 1;
-    //     
-    //     console.log('-----------------查询config----------------')
-    //     console.log(config)
-    //     console.log('-----------------查询config----------------')
-    //     webCall()
-    //       .then((data) => {
-
-    //         console.log('-----------------查询rank----------------')
-    //         console.log(data)
-    //         console.log('-----------------查询rank----------------')
+   
     function callback1(resp) {
       
 
@@ -221,7 +204,7 @@ let checkWin = (moves, options) => {
             totalIndex++
 
             var borderList;
-            if (heroAddress === config.userAddress) {
+            if (heroAddress === userAddress) {
               borderList = 'my-list'
               console.log(true)
             } else {
@@ -289,31 +272,30 @@ let checkWin = (moves, options) => {
               }
             }
             msg = `<div id="rank">
-                                                <div style="font-size:28px;color:#00BFDD;text-align:center;margin-bottom:7px;">TOP 10</div>
-                                                <div class="list-wrap" style="border-bottom:1px solid rgba(0,0,0,0.5);padding-bottom:3px;margi-bottom:5px;">
-                                                    <span>#</span>
-                                                    <span>
-                                                        address / nickname
-                                                        <a href="http://naspp.xyz" target="_blank" style="display:inline-block;margin-left:10px;," >
-                                                            <img src="explain.svg" style="vertical-align:middle;width:15px;" >
-                                                        </a>
-                                                    </span>
-                                                    <span>score</span>
-                                                    <span>time</span>
-                                                </div>
-                                                <ul style="padding-left:0;">
-                                                  ${list}
-                                                </ul>
-                                            </div>
-                                            <div style="color:#EF4868;font-size:22px;margin:20px 0;text-align:center;">
-                                             Your Best &nbsp  &nbsp   ${myscore}    &nbsp time ${mytime} 
-                                            </div>
-                                            <div style="font-size:14px;text-align:center;margin-bottom:10px;">An average of 30s is required when uploading historic records to Nebulas</div>
-                                            <div  class="back-to-begin">
-                                              <span class="back-to-begin" style="">Back</span>
-                                            </div>
-                                            
-                                            `
+                      <div style="font-size:28px;color:#00BFDD;text-align:center;margin-bottom:7px;">TOP 10</div>
+                      <div class="list-wrap" style="border-bottom:1px solid rgba(0,0,0,0.5);padding-bottom:3px;margi-bottom:5px;">
+                          <span>#</span>
+                          <span>
+                              address / nickname
+                              <a href="http://naspp.xyz" target="_blank" style="display:inline-block;margin-left:10px;," >
+                                  <img src="explain.svg" style="vertical-align:middle;width:15px;" >
+                              </a>
+                          </span>
+                          <span>score</span>
+                          <span>time</span>
+                      </div>
+                      <ul style="padding-left:0;">
+                        ${list}
+                      </ul>
+                  </div>
+                  <div style="color:#EF4868;font-size:22px;margin:20px 0;text-align:center;">
+                   Your Best &nbsp  &nbsp   ${myscore}    &nbsp time ${mytime} 
+                  </div>
+                  <div style="font-size:14px;text-align:center;margin-bottom:10px;">An average of 30s is required when uploading historic records to Nebulas</div>
+                  <div  class="back-to-begin">
+                    <span class="back-to-begin" style="">Back</span>
+                  </div>
+                `
 
             gameover.innerHTML = msg
             $('#game-over').attr('class', 'rank-game')
@@ -333,7 +315,6 @@ let checkWin = (moves, options) => {
 
     msg = `<div id="howtoplay">
                 <div class="how-text" style="font-size: 18px;text-align:left;">
-
 
                     <div style="color: #FFC300;"  class="how-tit">Log in</div>
                     <div>

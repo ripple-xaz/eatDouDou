@@ -1,6 +1,7 @@
 //主程序,业务逻辑
 
 function startGame(){
+	gameisbegin = true;
 	var _DATA = [		//地图数据
 		[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 		[1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -54,7 +55,7 @@ function startGame(){
 		//logo
 		stage.createItem({
 			x:game.width/2,
-			y:game.height*.15,
+			y:game.height*.25,
 			width:100,
 			height:100,
 			frames:3,
@@ -584,7 +585,7 @@ function startGame(){
 			// }
 			// preventClickflag = false;
 		    let css = Array.from(event.target.classList)
-		    
+
 		    if(css.includes('new-game')) {
 		        _SCORE = 0;
 				_LIFE = 3;

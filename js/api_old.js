@@ -3,14 +3,7 @@ var Neb = require("nebulas").Neb;
 var Account = require("nebulas").Account;
 var Transaction = require("nebulas").Transaction;
 var neb = new Neb();
-var NebPay = require("nebpay");
-var nebPay = new NebPay();
 
-
-function getBrowserInfo() {
-	return 'chrome'
-}
-var browser = getBrowserInfo();
 
 var nebHost_test = 'https://testnet.nebulas.io' //测试环境域名
 var nebHost = 'https://mainnet.nebulas.io' //线上环境域名
@@ -18,6 +11,7 @@ var contractAddress = "n2384jMDpgu7J6uLjXXBLxJohNCMPnN5HnG" //合约地址
 var nickNameAddress = "n1gHbworeeX9Q3Png44YysZDWpxbmyoXDw2"
 var chainid = 1;
 neb.setRequest(new HttpRequest(nebHost));
+
 
 
 var keyfile = null; //钱包文件
@@ -205,159 +199,3 @@ function dialog(ctx, text) { //弹出框
 	}, 1500)
 }
 
-
-
-	//newGameStart();
-
-
-
-
-function onSimulateCallClick(contractAddress,func,args,callback) {
-	to  = contractAddress;
-	value = '0';
-	callFunction =  func;
-	var callArgs =args;
-	nebPay.simulateCall(to, value, callFunction, callArgs, {
-		qrcode: {
-			showQRCode: false
-		},
-		goods: {
-			name: "test",
-			desc: "test goods"
-		},
-		listener: callback //set listener for extension transaction result
-	});
-}
-
-
-
-
-function newTransaction(contractAddress,callFunction,callArgs,callback) {
-	if (browser == 'chrome') {
-		if (typeof(webExtensionWallet) === "undefined") {
-			alert("请先安装星云谷歌拓展钱包.")
-		} else {
-			to = contractAddress;
-			value = '0';
-			callFunction = callFunction;
-			var callArgs = callArgs;
-			serialNumber = nebPay.call(to, value, callFunction, callArgs, {
-				
-				listener: callback //set listener for extension transaction result
-			});
-			setTimeout(() => {
-				onrefreshClick();
-			}, 1000);
-		}
-	} else {
-		layer.alert('请在谷歌浏览器下输入');
-	}
-}
-
-// $("#uploadscore").click(function() {
-// 	layer.open({
-// 		type: 1,
-// 		title: false //不显示标题栏
-// 			,
-// 		closeBtn: false,
-// 		area: '300px;',
-// 		shade: 0.8,
-// 		id: 'LAY_layuipro' //设定一个id，防止重复弹出
-// 			,
-// 		btn: ['提交', '取消'],
-// 		btnAlign: 'c',
-// 		moveType: 1 //拖拽模式，0或者1
-// 			,
-// 		content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;"><form class="layui-form" action="">\n' +
-// 			'  <div class="layui-form-item">\n' +
-// 			'    <div class="layui-input-block" style="margin-left: 0px;">\n' +
-// 			'      <input type="text" id="name" required maxlength="5"  name="title" lay-verify="title" autocomplete="off" placeholder="输入你的名字吧" class="layui-input" style="margin-left: 0px;">\n' +
-// 			'    </div>\n' +
-// 			'  </div>',
-// 		success: function(layero) {
-// 			// var btn = layero.find('.layui-layer-btn');
-// 			// btn.find('.layui-layer-btn0').attr({
-// 			//     href: 'http://www.layui.com/'
-// 			//     ,target: '_blank'
-// 			// });
-// 		}
-// 	});
-// });
-
-
-
-$(document).on("click", 'body .layui-layer-btn0', function() {
-	name = $('#name').val();
-	score = $('#finSumScore').text();
-	score = parseInt(score);
-	var browser = getBrowserInfo();
-	if (typeof(webExtensionWallet) === "undefined") {
-		layer.alert("请先安装星云谷歌拓展钱包.")
-	} else {
-		if (browser == 'chrome' && name) {
-			//向星云链提交数据
-			var to = contractAddress;
-			var value = '0';
-			var callFunction = 'welcomeHero';
-			timestamp = Date.parse(new Date());
-			var callArgs =  "[" + 100 +","+ 12121 + "]";
-			serialNumber = nebPay.call(to, value, callFunction, callArgs, {
-				qrcode: {
-					showQRCode: false
-				},
-				goods: {
-					name: "test",
-					desc: "test goods"
-				},
-				listener: updateScore //set listener for extension transaction result
-			});
-			setTimeout(() => {
-				onrefreshClick();
-			}, 1000);
-
-		} else {
-			layer.alert('请在谷歌浏览器下输入您的大名');
-		}
-	}
-});
-
-function onrefreshClick() {
-	nebPay.queryPayInfo(serialNumber) //search transaction result from server (result upload to server by app)
-		.then(function(resp) {
-			console.log('----------------queryPayInfo-----------');
-			console.log(resp);
-		})
-		.catch(function(err) {
-			console.log('----------------queryPayInfo-----------');
-			console.log(err);
-		});
-}
-
-function setScore(resp) {
-	heighscore = 0;
-	var heighscoretext = '0';
-	if (resp.result) {
-		var result = JSON.parse(resp.result);
-		console.log(result)
-	}
-	// $("#heighScore").text(heighscoretext);
-}
-
-function listener(resp) {
-	console.log('==--------------------listener--------------------')
-	console.log(resp)
-
-	// begin();
-}
-
-function begin() {
-	name = '';
-	score = 0;
-	$.jweGame.gameStart();
-}
-
-function updateScore(resp) {
-	// location.reload();
-	console.log(resp)
-
-}

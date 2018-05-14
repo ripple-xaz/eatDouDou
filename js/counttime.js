@@ -1,6 +1,5 @@
 let gameTimer = null;
 
-
 class CountTimer{
 	constructor(callback) {
 	  this.timer = null
@@ -42,6 +41,7 @@ class CountTimer{
 
 	stop(){
 		clearInterval(this.timer)
+		console.log(this.state)
 	}
 
 	checkTime(i){

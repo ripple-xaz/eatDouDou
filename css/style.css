@@ -226,6 +226,7 @@ opacity: 0.8;
 }
 input{
 outline:none;
+box-sizing: border-box;
 }
 
 
@@ -249,15 +250,15 @@ font-size: 30px;
 margin-bottom: 30px;
 cursor: pointer;
 }
-#begin>span:nth-child(1){
+#begin>span:nth-child(2){
 background: #F46E6E;
 pointer-events: auto;
 }
-#begin>span:nth-child(2){
+#begin>span:nth-child(3){
 background: #00BFDD;
 pointer-events: auto;
 }
-#begin>span:nth-child(3){
+#begin>span:nth-child(4){
 background: #FFC300;
 pointer-events: auto;
 }
@@ -279,6 +280,7 @@ pointer-events: auto;
   width: 50vmin;
 }
 .over span.rank{
+   position: relative;
   cursor: pointer;
   background: #00BFDD;
 }
@@ -406,3 +408,9 @@ line-height: 50px;
 }
 
 
+
+.my-list{
+border: 1px solid #EF4868;
+border-radius: 6px;
+margin: 5px 0;
+}
